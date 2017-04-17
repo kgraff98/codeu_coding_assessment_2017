@@ -100,14 +100,13 @@ final class MyJSON implements JSON {
 
 //----------------------------------------------------------------------------------------------
   // GET OBJECTS
-  //
   // Copy the names of all object values to the given collection.
   @Override
   public void getObjects(Collection<String> names) {
-    // TODO: implement this
+    
   }
+//----------------------------------------------------------------------------------------------
   // GET STRINGS
-  //
   // Copy the names of all string values to the given collection.
   @Override
   public void getStrings(Collection<String> names) {
