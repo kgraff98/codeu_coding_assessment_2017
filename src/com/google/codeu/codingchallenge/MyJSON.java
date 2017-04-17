@@ -17,23 +17,53 @@ package com.google.codeu.codingchallenge;
 import java.util.Collection;
 
 final class MyJSON implements JSON {
-
+  // GET OBJECT
+  // Get the value of the nested object with the given name. If there is
+  // no nested object with that name, the method will return null.
   @Override
   public JSON getObject(String name) {
-    // TODO: implement this
-    return null;
+    //Checks if name is null
+    if(name == null) {
+      return null;
+    }
+    //Get the object value associated with the name
+    JSON json = this.get(name);
+    //Check if the object is null, throws exception otherwise
+    if(json == null) {
+      return null;
+    }
+    //Return the nested JSON object
+    return json;
   }
-
+  // SET OBJECT
+  // Set the value of the nested object with the given name. Any old value
+  // should be overwritten. This method will always return a reference to
+  // "this".
   @Override
   public JSON setObject(String name, JSON value) {
-    // TODO: implement this
+    //checks if name is null
+    if(name == null) {
+      return null;
+    }
+    //checks if value is null
+    if(value == null) {
+      return null;
+    }
+    this.opt(name) = value;
     return this;
   }
-
+  // GET STRING
+  // Get the string value within this object that has the given name. if
+  // there is no string with the given name, the method will return null.
   @Override
   public String getString(String name) {
-    // TODO: implement this
-    return null;
+      JSON json = this.get(name);
+      if (json instanceof String) {
+        return (String) json;
+      }
+      else {
+        return null;
+    }
   }
 
   @Override
