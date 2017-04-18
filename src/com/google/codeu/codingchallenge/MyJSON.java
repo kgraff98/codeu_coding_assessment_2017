@@ -15,16 +15,19 @@
 package com.google.codeu.codingchallenge;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 final class MyJSON implements JSON {
 
   private String name;
   private String val;
   private JSON value;
+  public ArrayList<MyJSON> JSONs = new ArrayList<MyJSON>();
 
   public MyJSON(String name, JSON value) {
     this.name = name;
     this.value = value;
+    JSONs.add(this);
   }
   //get name of object
   public String getName() {
@@ -61,6 +64,7 @@ final class MyJSON implements JSON {
     if(this.getName().equals(name)){
       //Set value equal to new value
       this.value = value;
+    }
     //Always return reference to "this"
     return this;
   }
@@ -95,21 +99,41 @@ final class MyJSON implements JSON {
     if(this.getName().equals(name)){
       //Set string value equal to new value
       this.val = value;
+    }
     //Always return reference to "this"
     return this;
+  }
 
 //----------------------------------------------------------------------------------------------
   // GET OBJECTS
   // Copy the names of all object values to the given collection.
   @Override
   public void getObjects(Collection<String> names) {
-    
+    int i;
+    //Iterate over arraylist of MyJSONs
+    for(i = 0; i < JSONs.size(); i++) {
+      //Get the object at the ith position
+      MyJSON temp = JSONs.get(i);
+      //Get the name of the object
+      String n = temp.name;
+      //Add the name to the collection
+      names.add(n);
+    }
   }
 //----------------------------------------------------------------------------------------------
   // GET STRINGS
   // Copy the names of all string values to the given collection.
   @Override
   public void getStrings(Collection<String> names) {
-    // TODO: implement this
+    int i;
+    //Iterate over arraylist of MyJSONs
+    for(i = 0; i < JSONs.size(); i++) {
+      //Get the object at the ith position
+      MyJSON temp = JSONs.get(i);
+      //Get the name of the string value of the object
+      String n = temp.val;
+      //Add the name of the string value to the collection
+      names.add(n);
+    }
   }
 }
