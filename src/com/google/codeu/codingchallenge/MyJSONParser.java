@@ -18,9 +18,51 @@ import java.io.IOException;
 
 final class MyJSONParser implements JSONParser {
 
+	/*Example
+	'{ }'
+    '{ "name": "sam doe" }'
+    '{ "name": { "first": "sam", "last": "doe" } }'
+    */
+
   @Override
   public JSON parse(String in) throws IOException {
-    // TODO: implement this
-    return new MyJSON();
+    if(in == null){
+    	throw IOException("Empty Object");
+    }
+	char current_parse;
+	String to_parse = in;
+    int nest_lvl = 0;
+    boolean quoted = false;
+ 
+    try{
+		  for (current_parse = to_parse.charAt(0); to_parse.length > 0; current_parse = to_parse.charAt(0), to_parse = to_parse.substring(1))
+			  {
+				  switch (current_parse){
+					  if (!quoted){
+					  case '{':
+						  nest_lvl++;
+						  break;
+					  case '}':
+						  if (nest_lvl == 0){
+							  throw IOException("Error");
+						  }
+						  nest_lvl--;
+						  break;
+					  default:
+						  throw IOException("Error");
+						  break;
+					  }
+				  case '"':
+					  quoted = !quoted;
+					  break;
+				  }
+			  default:
+				  break;
+			  }
+		  return new MyJSON();
+	  }
+	  catch (Exception e) {
+		  throw IOException("There is an error");
+	  }
   }
 }
